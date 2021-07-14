@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal nav-head heading">
+            <a class="btn btn-outline-primary back-btn" routerLinkActive="active" routerLink="/event-list">Back</a> Add Event
+        </h5>
+    </div>
+    <div class="col-md-4 register-event">
+        <!-- form card register -->
+        <div class="card-body">
+            <form [formGroup]="eventForm" (submit)="onSubmit()" id="employee-form">
+                <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input class="form-control" type="text" formControlName="eventname">
+                    <!-- error -->
+                    <div class="text-danger" *ngIf="submitted && myForm.eventname.errors?.required">
+                        Event is required.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDescription">Description</label>
+                    <input class="form-control" type="text" formControlName="description">
+                    <!-- error -->
+                    <div class="text-danger" *ngIf="submitted && myForm.description.errors?.required">
+                        Description is required.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputVerify3">Start Date</label>
+                    <input type="date" formControlName="startDate">
+                    <!-- error -->
+                    <div class="text-danger" *ngIf="submitted && myForm.startDate.errors?.required">
+                        Please select start date.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputVerify4">End Date</label>
+                    <input type="date" formControlName="endDate">
+                    <!-- error -->
+                    <div class="text-danger" *ngIf="submitted && myForm.endDate.errors?.required">
+                        Please select end date.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3">Recurrence Type</label>
+                    <select class="custom-select form-control" (change)="updateProfile($any($event.target).value)" formControlName="recurrenceType">
+						<option value="">Choose...</option>
+						<option *ngFor="let eventProfile of EventProfile" value="{{eventProfile}}">{{eventProfile}}
+						</option>
+					</select>
+                    <!-- error -->
+                    <div class="text-danger" *ngIf="submitted && myForm.recurrenceType.errors?.required">
+                        Choose Recurrence Type.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success btn-lg btn-block" type="submit">Add Event</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!-- form card register -->
+</div>

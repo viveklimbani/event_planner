@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal nav-head heading">Event List</h5>
+        <div>
+            <a class="btn btn-outline-primary nav-head mb-2" routerLinkActive="active" routerLink="/create-event"> Add Event</a>
+
+            <!-- No data message -->
+            <p *ngIf="Event.length <= 0" class="no-data text-center">There is no employee added yet!</p>
+
+            <!-- Event list -->
+            <table class="table table-bordered" *ngIf="Event.length > 0">
+                <thead class="table-success">
+                    <tr>
+                        <th scope="col">Event ID</th>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Recurrence Type</th>
+                        <th scope="col center">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let event of Event; let i = index">
+                        <th scope="row">{{event._id}}</th>
+                        <td>{{event.eventname}}</td>
+                        <td>{{event.description}}</td>
+                        <td>{{event.startDate}}</td>
+                        <td>{{event.endDate}}</td>
+                        <td>{{event.recurrenceType}}</td>
+                        <td class="text-center edit-block">
+                            <span class="edit" [routerLink]="['/edit-event/', event._id]">
+								<button type="button" class="btn btn-success btn-sm action_btn">Edit</button>
+							</span>
+                            <span class="delete" (click)="removeEvent(event, i)">
+								<button type="button" class="btn btn-danger btn-sm action_btn">Delete</button>
+							</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
